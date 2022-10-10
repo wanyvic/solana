@@ -110,7 +110,7 @@ fn key_to_slot(key: &str) -> Option<Slot> {
 // added to ConfirmedBlock, they must either be excluded or set to `default_on_eof` here
 //
 #[derive(Serialize, Deserialize)]
-struct StoredConfirmedBlock {
+pub struct StoredConfirmedBlock {
     previous_blockhash: String,
     blockhash: String,
     parent_slot: Slot,
@@ -299,7 +299,7 @@ impl From<Reward> for StoredConfirmedBlockReward {
 
 // A serialized `TransactionInfo` is stored in the `tx` table
 #[derive(Serialize, Deserialize, PartialEq, Eq, Debug)]
-struct TransactionInfo {
+pub struct TransactionInfo {
     slot: Slot, // The slot that contains the block with this transaction in it
     index: u32, // Where the transaction is located in the block
     err: Option<TransactionError>, // None if the transaction executed successfully
@@ -400,7 +400,7 @@ impl Default for LedgerStorageConfig {
 
 #[derive(Clone)]
 pub struct LedgerStorage {
-    connection: bigtable::BigTableConnection,
+    pub connection: bigtable::BigTableConnection,
 }
 
 impl LedgerStorage {
